@@ -1,0 +1,24 @@
+.header-container {
+  .info {
+    background-color: $color-blue-2;
+    padding: $pd-3 0;
+    .left {
+      display: flex;
+      .info-item {
+        display: flex;
+        align-items: center;
+        margin-right: $mg-4;
+        @include styleText($color-white-0, $fs-0, $fw-0);
+        .icon {
+          margin-right: $mg-0;
+          width: 25px;
+          height: 25px;
+          background-color: $color-white-0;
+          border-radius: 50%;
+          //   @include styleText($color-black-0, $fs-1, $fw-0);
+          color: $color-black-0;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+// .backgroundImage {
+//   background-position: center;
+//   background-repeat: no-repeat;
+//   background-size: cover;
+// }
+
+// Placeholder
+%backgroundImage {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+%centerBlock {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+}
+
+%centerFlex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+%input {
+  border: none;
+  outline: none;
+  width: 100%;
+  background-color: $color-white-0;
+  padding: $pd-0 $pd-1;
+  transition: 0.25s ease;
+}
