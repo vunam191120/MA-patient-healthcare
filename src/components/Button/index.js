@@ -14,7 +14,7 @@ export default function Button({
       onClick={onClick}
       className={className}
     >
-      <span>{children}</span>
+      {children}
     </button>
   );
 }
