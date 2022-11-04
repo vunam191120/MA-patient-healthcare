@@ -1,20 +1,11 @@
-import React, { useEffect, useRef, useMemo } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { HiOutlineChevronDown } from 'react-icons/hi';
 
 import healthCareLogo from '../../assets/img/health-care-logo.png';
-import Button from '../Button';
 
-export default function Navigation() {
+export default function Navigation({ activeBg }) {
   const navRef = useRef();
-
-  // const navOffsetHeight = useMemo(() => {
-  //   return navRef.current.clientHeight;
-  // }, [navRef]);
-
-  // const headerOffsetHeight = useMemo(() => {
-  //   return document.querySelector('.header-container').clientHeight;
-  // }, []);
 
   useEffect(() => {
     const navOffsetHeight = navRef.current.clientHeight;
@@ -29,8 +20,6 @@ export default function Navigation() {
       }
     };
 
-    // console.log(document.querySelector('.header-container'));
-
     window.addEventListener('scroll', handleScroll);
 
     return () => {
@@ -39,7 +28,10 @@ export default function Navigation() {
   }, []);
 
   return (
-    <div ref={navRef} className="navigation-container">
+    <div
+      ref={navRef}
+      className={`navigation-container ${activeBg ? 'activeBg' : ''}`}
+    >
       <div className="container-fluid navigation-content">
         <div className="logo-container">
           <img
@@ -77,9 +69,8 @@ export default function Navigation() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="" className="nav-link">
-              <span className="text">Patient guide</span>
-              <HiOutlineChevronDown className="icon" />
+            <Link to="/contact" className="nav-link">
+              <span className="text">Contact</span>
             </Link>
           </li>
           <li className="nav-item">
@@ -90,9 +81,13 @@ export default function Navigation() {
           </li>
         </ul>
         <div className="other-option">
-          <Button className="button square button--blue--dark" type="button">
+          <Link
+            to="/bookAppointment"
+            className="button square button--blue--dark"
+            type="button"
+          >
             Make an appointment
-          </Button>
+          </Link>
         </div>
       </div>
     </div>

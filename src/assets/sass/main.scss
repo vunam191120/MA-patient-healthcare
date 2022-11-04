@@ -1,8 +1,8 @@
 // Helpers
 @import './Helpers/variables.scss';
-@import './Helpers/extend.scss';
 @import './Helpers/mixin.scss';
 @import './Helpers/animation.scss';
+@import './Helpers/extend.scss';
 
 // Vendors
 @import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
@@ -19,8 +19,14 @@
 @import './Components/navigation.scss';
 @import './Components/footer.scss';
 @import './Components/typeWriter.scss';
+@import './Components/appointmentDetailsForm.scss';
+@import './Components/patientInformation.scss';
+@import './Components/appointmentInformation.scss';
+@import './Components/spinner.scss';
 
 // Pages
 @import './Page/homepage.scss';
+@import './Page/clientBookAppointment.scss';
+@import './Page/contact.scss';
 
 // Theme

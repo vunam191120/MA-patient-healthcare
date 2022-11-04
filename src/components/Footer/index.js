@@ -13,7 +13,7 @@ import doctor3 from '../../assets/img/doctor3.jpeg';
 
 export default function Footer() {
   return (
-    <>
+    <footer>
       <section className="footer-container">
         <div className="container-fluid">
           <div className="footer-content">
@@ -116,6 +116,6 @@ export default function Footer() {
           </Link>
         </p>
       </section>
-    </>
+    </footer>
   );
 }
