@@ -1,18 +1,10 @@
-import React from 'react';
-import { Col, Form, Row, Input, Select, DatePicker } from 'antd';
-import { BsSearch, BsSquareFill, BsTelephoneFill } from 'react-icons/bs';
+import React, { useEffect } from 'react';
+import { Col, Form, Row, Input } from 'antd';
+import { BsSearch, BsSquareFill } from 'react-icons/bs';
 import { BiNotepad } from 'react-icons/bi';
 import { GiReceiveMoney } from 'react-icons/gi';
-import {
-  FaRegHospital,
-  FaGlassCheers,
-  FaRegCalendarAlt,
-  FaFacebookF,
-  FaPinterestP,
-  FaInstagram,
-  FaUser,
-} from 'react-icons/fa';
-import { IoCheckmarkDone, IoEarth } from 'react-icons/io5';
+import { FaRegHospital, FaGlassCheers, FaRegCalendarAlt } from 'react-icons/fa';
+import { IoEarth } from 'react-icons/io5';
 import { FaBacteria } from 'react-icons/fa';
 import { HiOutlineShieldCheck } from 'react-icons/hi';
 import { MdOutlineFaceUnlock } from 'react-icons/md';
@@ -22,21 +14,11 @@ import {
   RiNurseFill,
   RiLiveLine,
 } from 'react-icons/ri';
-import { AiOutlineTwitter } from 'react-icons/ai';
-import { TfiEmail } from 'react-icons/tfi';
 import moment from 'moment';
 import Typewriter from 'typewriter-effect';
 
 import bgDoctor from '../../assets/img/banner-bg-doctor.png';
-import doctor1 from '../../assets/img/doctor1.jpeg';
-import doctor2 from '../../assets/img/doctor2.jpeg';
-import doctor3 from '../../assets/img/doctor3.jpeg';
-import doctor4 from '../../assets/img/doctor4.jpeg';
-import news1 from '../../assets/img/new-bg1.jpeg';
-import news2 from '../../assets/img/new-bg2.jpeg';
-import news3 from '../../assets/img/new-bg3.jpeg';
 import bgApp from '../../assets/img/app-bg.png';
-import bgAbout from '../../assets/img/about-bg.png';
 import solutions from '../../assets/img/solutions.png';
 import Button from '../../components/Button';
 import Header from '../../components/Header';
@@ -44,19 +26,29 @@ import Navigation from '../../components/Navigation';
 import { Link } from 'react-router-dom';
 import Footer from '../../components/Footer';
 import { Animate } from '../../components/AnimateIn';
-
-const { Option } = Select;
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  fetchArticles,
+  selectArticles,
+} from '../../store/slices/articlesSlice';
+import Doctor from '../../components/Doctor';
+import Appointment from '../../components/Appointment';
+import AboutUs from '../../components/AboutUs';
 
 export default function HomePage() {
+  const dispatch = useDispatch();
   const [form] = Form.useForm();
-  const [appointmentForm] = Form.useForm();
+  // const [appointmentForm] = Form.useForm();
+  const articles = useSelector(selectArticles);
+
+  useEffect(() => {
+    dispatch(fetchArticles());
+  }, [dispatch]);
 
   const handleSubmitSearch = () => {};
 
-  const handleSubmitBook = () => {};
-
   return (
-    <>
+    <div className="app-container">
       <Header />
       {/* Banner */}
       <section className="banner-container">
@@ -159,82 +151,7 @@ export default function HomePage() {
       </section>
 
       {/* About */}
-      <section className="about-container container-space">
-        <div className="container-fluid">
-          <Row className="about-content">
-            <Col className="left" xs={24} sm={24} md={12} lg={12} xl={12}>
-              <Animate.FadeInLeft>
-                <img src={bgAbout} alt="about background" className="image" />
-              </Animate.FadeInLeft>
-            </Col>
-            <Col className="right" xs={24} sm={24} md={12} lg={12} xl={12}>
-              <Animate.FadeInDown>
-                <h4 className="heading">About Us</h4>
-                <h3 className="title">
-                  Connect to Call a Doctor by Video or Audio During the COVID-19
-                  Pandemic
-                </h3>
-                <p className="description">
-                  Many healthcare systems around the world together with
-                  government agencies and startup companies are building and
-                  delivering Telehealth solutions the future of non-emergency
-                  and routine healthcare delivery
-                </p>
-              </Animate.FadeInDown>
-              <ul className="about-features">
-                <Animate.FadeInUp>
-                  <li className="about-item">
-                    <div className="content">
-                      <IoCheckmarkDone className="icon" />
-                      <span className="text"> Cold, Cough, Flu</span>
-                    </div>
-                  </li>
-                </Animate.FadeInUp>
-                <Animate.FadeInUp>
-                  <li className="about-item">
-                    <div className="content">
-                      <IoCheckmarkDone className="icon" />
-                      <span className="text">Chronic Disease</span>
-                    </div>
-                  </li>
-                </Animate.FadeInUp>
-                <Animate.FadeInUp>
-                  <li className="about-item">
-                    <div className="content">
-                      <IoCheckmarkDone className="icon" />
-                      <span className="text">Allergies</span>
-                    </div>
-                  </li>
-                </Animate.FadeInUp>
-                <Animate.FadeInUp>
-                  <li className="about-item">
-                    <div className="content">
-                      <IoCheckmarkDone className="icon" />
-                      <span className="text">Pain</span>
-                    </div>
-                  </li>
-                </Animate.FadeInUp>
-                <Animate.FadeInUp>
-                  <li className="about-item">
-                    <div className="content">
-                      <IoCheckmarkDone className="icon" />
-                      <span className="text">Women's Health issues</span>
-                    </div>
-                  </li>
-                </Animate.FadeInUp>
-                <Animate.FadeInUp>
-                  <li className="about-item">
-                    <div className="content">
-                      <IoCheckmarkDone className="icon" />
-                      <span className="text">Medication Questions</span>
-                    </div>
-                  </li>
-                </Animate.FadeInUp>
-              </ul>
-            </Col>
-          </Row>
-        </div>
-      </section>
+      <AboutUs />
 
       {/* Features */}
       <section className="feature-container container-space">
@@ -530,334 +447,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Our doctors */}
-      <section className="doctor-container container-space">
-        <div className="container-fluid">
-          <div className="doctor-content">
-            {/* <Animate.ScaleInCenter> */}
-            <div className="section-title">
-              <h4 className="heading">Our Doctors</h4>
-              <h3 className="title">Specialized Doctors</h3>
-              <p className="description">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis
-                ipsum suspendisse
-              </p>
-            </div>
-            {/* </Animate.ScaleInCenter> */}
-            <ul className="doctor-list">
-              <Animate.FadeInLeft>
-                <li className="doctor-item">
-                  <img src={doctor1} alt="doctor" className="doctor-avatar" />
-                  <div className="content">
-                    <h3 className="name">Dr. James Adult</h3>
-                    <span className="specialized">Cardiologist</span>
-                    <ul className="social-list">
-                      <li className="social-item facebook">
-                        <FaFacebookF className="icon" />
-                      </li>
-                      <li className="social-item twitter">
-                        <AiOutlineTwitter className="icon" />
-                      </li>
-                      <li className="social-item pinterest">
-                        <FaPinterestP className="icon" />
-                      </li>
-                      <li className="social-item instagram">
-                        <FaInstagram className="icon" />
-                      </li>
-                    </ul>
-                  </div>
-                </li>
-              </Animate.FadeInLeft>
-              <Animate.FadeInUp>
-                <li className="doctor-item">
-                  <img src={doctor2} alt="doctor" className="doctor-avatar" />
-                  <div className="content">
-                    <h3 className="name">Dr. James Alison</h3>
-                    <span className="specialized">Medicine</span>
-                    <ul className="social-list">
-                      <li className="social-item facebook">
-                        <FaFacebookF className="icon" />
-                      </li>
-                      <li className="social-item twitter">
-                        <AiOutlineTwitter className="icon" />
-                      </li>
-                      <li className="social-item pinterest">
-                        <FaPinterestP className="icon" />
-                      </li>
-                      <li className="social-item instagram">
-                        <FaInstagram className="icon" />
-                      </li>
-                    </ul>
-                  </div>
-                </li>
-              </Animate.FadeInUp>
-              <Animate.FadeInDown>
-                <li className="doctor-item">
-                  <img src={doctor3} alt="doctor" className="doctor-avatar" />
-                  <div className="content">
-                    <h3 className="name">Dr. Peter Adlock</h3>
-                    <span className="specialized">Neurologiest</span>
-                    <ul className="social-list">
-                      <li className="social-item facebook">
-                        <FaFacebookF className="icon" />
-                      </li>
-                      <li className="social-item twitter">
-                        <AiOutlineTwitter className="icon" />
-                      </li>
-                      <li className="social-item pinterest">
-                        <FaPinterestP className="icon" />
-                      </li>
-                      <li className="social-item instagram">
-                        <FaInstagram className="icon" />
-                      </li>
-                    </ul>
-                  </div>
-                </li>
-              </Animate.FadeInDown>
-              <Animate.FadeInRight>
-                <li className="doctor-item">
-                  <img src={doctor4} alt="doctor" className="doctor-avatar" />
-                  <div className="content">
-                    <h3 className="name">Dr. Jelin Alis</h3>
-                    <span className="specialized">Medicine</span>
-                    <ul className="social-list">
-                      <li className="social-item facebook">
-                        <FaFacebookF className="icon" />
-                      </li>
-                      <li className="social-item twitter">
-                        <AiOutlineTwitter className="icon" />
-                      </li>
-                      <li className="social-item pinterest">
-                        <FaPinterestP className="icon" />
-                      </li>
-                      <li className="social-item instagram">
-                        <FaInstagram className="icon" />
-                      </li>
-                    </ul>
-                  </div>
-                </li>
-              </Animate.FadeInRight>
-            </ul>
-          </div>
-        </div>
-      </section>
+      {/* Doctor */}
+      <Doctor />
 
       {/* Appointment */}
-      <section className="appointment-container container-space">
-        <div className="container-fluid">
-          <Row className="appointment-content">
-            <Col className="left" xs={24} sm={24} md={12} lg={12} xl={12}>
-              <ul className="info-list">
-                <Animate.ScaleInCenter>
-                  <li className="info-item">
-                    <div className="info-num-container">
-                      <span className="num">2500</span>
-                      <span className="icon">&#43;</span>
-                    </div>
-                    <p className="text">Care Locations</p>
-                  </li>
-                </Animate.ScaleInCenter>
-                <Animate.ScaleInCenter>
-                  <li className="info-item">
-                    <div className="info-num-container">
-                      <span className="num">2700</span>
-                      <span className="icon">&#43;</span>
-                    </div>
-                    <p className="text">Virtual Care Solutions</p>
-                  </li>
-                </Animate.ScaleInCenter>
-                <Animate.ScaleInCenter>
-                  <li className="info-item">
-                    <div className="info-num-container">
-                      <span className="num">99.6</span>
-                      <span className="icon">%</span>
-                    </div>
-                    <p className="text">Connections Success Rate</p>
-                  </li>
-                </Animate.ScaleInCenter>
-                <Animate.ScaleInCenter>
-                  <li className="info-item">
-                    <div className="info-num-container">
-                      <span className="num">30</span>
-                      <span className="icon">&#43;</span>
-                    </div>
-                    <p className="text">Award Winning</p>
-                  </li>
-                </Animate.ScaleInCenter>
-              </ul>
-            </Col>
-            <Col className="right" xs={24} sm={24} md={12} lg={12} xl={12}>
-              <Animate.FadeInRight>
-                <Form
-                  className="appointment-form"
-                  form={appointmentForm}
-                  onFinish={handleSubmitBook}
-                  name="appointmentForm"
-                  scrollToFirstError
-                >
-                  <span className="heading">Call to Action</span>
-                  <h3 className="title">Make An Appointment</h3>
-                  <div className="form-group">
-                    {/* Name */}
-                    <Form.Item className="form-input-group">
-                      <Form.Item
-                        name="name"
-                        rules={[
-                          {
-                            required: true,
-                            message: 'Please enter your name!',
-                          },
-                        ]}
-                      >
-                        <Input
-                          className="input"
-                          placeholder="Enter your name!"
-                        />
-                      </Form.Item>
-                      <FaUser className="icon" />
-                    </Form.Item>
-
-                    {/* Email */}
-                    <Form.Item className="form-input-group">
-                      <Form.Item
-                        name="email"
-                        rules={[
-                          {
-                            type: 'email',
-                            message: 'The input is not valid E-mail!',
-                          },
-                          {
-                            required: true,
-                            message: 'Please enter your name!',
-                          },
-                        ]}
-                      >
-                        <Input
-                          className="input"
-                          placeholder="Enter your email!"
-                        />
-                      </Form.Item>
-                      <TfiEmail className="icon" />
-                    </Form.Item>
-
-                    {/* Phone */}
-                    <Form.Item className="form-input-group">
-                      <Form.Item
-                        name="phone"
-                        rules={[
-                          {
-                            required: true,
-                            message: 'Please enter your phone!',
-                          },
-                        ]}
-                      >
-                        <Input
-                          className="input"
-                          placeholder="Enter your phone!"
-                        />
-                      </Form.Item>
-                      <BsTelephoneFill className="icon" />
-                    </Form.Item>
-
-                    {/* Category */}
-                    <Form.Item
-                      name="category"
-                      rules={[
-                        {
-                          required: true,
-                          message: 'Please select your category!',
-                        },
-                      ]}
-                      className="form-input-group"
-                    >
-                      <Select
-                        placeholder="Select your cateogry"
-                        optionLabelProp="label"
-                      >
-                        <Option key="1" values="Medicine">
-                          Medicine
-                        </Option>
-                        <Option key="2" values="Cardiologists">
-                          Cardiologists
-                        </Option>
-                        <Option key="3" values="Medicine">
-                          Medicine
-                        </Option>
-                        <Option key="4" values="Cardiologists">
-                          Cardiologists
-                        </Option>
-                      </Select>
-                    </Form.Item>
-
-                    {/* Doctor */}
-                    <Form.Item
-                      name="doctor"
-                      rules={[
-                        {
-                          required: true,
-                          message: 'Please select your doctor!',
-                        },
-                      ]}
-                      className="form-input-group"
-                    >
-                      <Select
-                        placeholder="Select your doctor"
-                        optionLabelProp="label"
-                      >
-                        <Option key="1" values="Dr. James Adult">
-                          Dr. James Adult
-                        </Option>
-                        <Option key="2" values="Dr. James Alison">
-                          Dr. James Alison
-                        </Option>
-                        <Option key="3" values="Dr. James Adult">
-                          Dr. James Adult
-                        </Option>
-                        <Option key="4" values="Dr. James Alison">
-                          Dr. James Alison
-                        </Option>
-                      </Select>
-                    </Form.Item>
-
-                    {/* Date */}
-                    <Form.Item
-                      rules={[
-                        {
-                          required: true,
-                          message: 'Please select your date!',
-                        },
-                      ]}
-                      className="form-input-group"
-                    >
-                      <DatePicker
-                        disabledDate={(current) => {
-                          // Disable all Sunday, today and days before today
-                          return (
-                            current.day() === 0 ||
-                            (current && current < moment().endOf('day'))
-                          );
-                        }}
-                        allowClear={false}
-                        format="DD-MM-YYYY"
-                      />
-                    </Form.Item>
-                  </div>
-
-                  <Form.Item>
-                    <Button
-                      className="button button--blue--light"
-                      type="submit"
-                    >
-                      Confirm Appointment
-                    </Button>
-                  </Form.Item>
-                </Form>
-              </Animate.FadeInRight>
-            </Col>
-          </Row>
-        </div>
-      </section>
+      <Appointment />
 
       {/* News */}
       <section className="news-container container-space">
@@ -875,69 +469,37 @@ export default function HomePage() {
               </div>
             </Animate.FadeInDown>
             <div className="news-list">
-              <Animate.FadeInLeft>
-                <figure className="news-item">
-                  <Link to="">
-                    <img className="new-image" alt="new img" src={news1} />
-                    <figcaption className="content">
-                      <span className="date">20 April, 2022</span>
-                      <div className="content-overlay">
-                        <h3 className="title">
-                          Telehealth Is Here To Stay. In Your Facility Ready?
-                        </h3>
-                        <Button className="button button--text--blue">
-                          <span>Read more</span>
-                          <span className="icon">&#43;</span>
-                        </Button>
-                      </div>
-                    </figcaption>
-                  </Link>
-                </figure>
-              </Animate.FadeInLeft>
-              <Animate.FadeInDown>
-                <figure className="news-item">
-                  <Link to="">
-                    <img className="new-image" alt="new img" src={news2} />
-                    <figcaption className="content">
-                      <span className="date">20 April, 2022</span>
-                      <div className="content-overlay">
-                        <h3 className="title">
-                          Coronavirus Stimulus Checks: What You Need To Know
-                        </h3>
-                        <Button className="button button--text--blue">
-                          <span>Read more</span>
-                          <span className="icon">&#43;</span>
-                        </Button>
-                      </div>
-                    </figcaption>
-                  </Link>
-                </figure>
-              </Animate.FadeInDown>
-              <Animate.FadeInRight>
-                <figure className="news-item">
-                  <Link to="">
-                    <img className="new-image" alt="new img" src={news3} />
-                    <figcaption className="content">
-                      <span className="date">20 April, 2022</span>
-                      <div className="content-overlay">
-                        <h3 className="title">
-                          People Worldwide Adjust To New Life Amid COVID-19
-                        </h3>
-                        <Button className="button button--text--blue">
-                          <span>Read more</span>
-                          <span className="icon">&#43;</span>
-                        </Button>
-                      </div>
-                    </figcaption>
-                  </Link>
-                </figure>
-              </Animate.FadeInRight>
+              {articles.slice(articles.length - 3).map((article, index) => (
+                <Animate.FadeInDown>
+                  <figure key={index} className="news-item">
+                    <Link to={`/articles/detail/${article.slug}`}>
+                      <img
+                        className="new-image"
+                        alt="new img"
+                        src={article.image}
+                      />
+                      <figcaption className="content">
+                        <span className="date">
+                          {moment(article.created_date).format('MMM Do YY')}
+                        </span>
+                        <div className="content-overlay">
+                          <h3 className="title">{article.title}</h3>
+                          <Button className="button button--text--blue">
+                            <span>Read more</span>
+                            <span className="icon">&#43;</span>
+                          </Button>
+                        </div>
+                      </figcaption>
+                    </Link>
+                  </figure>
+                </Animate.FadeInDown>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
       <Footer />
-    </>
+    </div>
   );
 }

@@ -23,10 +23,25 @@
 @import './Components/patientInformation.scss';
 @import './Components/appointmentInformation.scss';
 @import './Components/spinner.scss';
+@import './Components/modal.scss';
+@import './Components/tag.scss';
+@import './Components/doctor.scss';
+@import './Components/appointment.scss';
+@import './Components/aboutUs.scss';
+@import './Components/pagination.scss';
+@import './Components/pageHeader.scss';
+@import './Components/partner.scss';
 
 // Pages
 @import './Page/homepage.scss';
 @import './Page/clientBookAppointment.scss';
 @import './Page/contact.scss';
+@import './Page/signIn.scss';
+@import './Page/myProfile.scss';
+@import './Page/signUp.scss';
+@import './Page/verify.scss';
+@import './Page/article.scss';
+@import './Page/articleDetail.scss';
+@import './Page/about.scss';
 
 // Theme

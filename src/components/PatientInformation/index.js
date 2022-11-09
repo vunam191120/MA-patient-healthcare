@@ -1,7 +1,24 @@
 import { Row, Col, Form, Input, DatePicker, Radio } from 'antd';
-import React from 'react';
+import moment from 'moment';
+import React, { useEffect } from 'react';
+import { isLogin } from '../../helpers/isLogin';
 
 export default function PatientInformation({ form }) {
+  useEffect(() => {
+    if (isLogin) {
+      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      form.setFieldsValue({
+        email: currentUser.email,
+        name: currentUser.full_name,
+        phone: currentUser.phone,
+        gender:
+          currentUser.gender.charAt(0).toUpperCase() +
+          currentUser.gender.slice(1),
+        date_of_birth: moment(currentUser.date_of_birth),
+      });
+    }
+  }, [form]);
+
   return (
     <div className="information__container">
       <Row>
@@ -30,7 +47,7 @@ export default function PatientInformation({ form }) {
               <DatePicker
                 className="input"
                 allowClear={false}
-                format="DD/MM/YYYY"
+                format="DD-MM-YYYY"
               />
             </Form.Item>
 
@@ -45,9 +62,9 @@ export default function PatientInformation({ form }) {
               ]}
             >
               <Radio.Group>
-                <Radio value="female">Female</Radio>
-                <Radio value="male">Male</Radio>
-                <Radio value="other">Other</Radio>
+                <Radio value="Female">Female</Radio>
+                <Radio value="Male">Male</Radio>
+                <Radio value="Other">Other</Radio>
               </Radio.Group>
             </Form.Item>
           </div>

@@ -42,3 +42,7 @@ input:-webkit-autofill:active {
 .app-container {
   overflow: hidden;
 }
+
+.mg-header {
+  margin-top: $header-height;
+}

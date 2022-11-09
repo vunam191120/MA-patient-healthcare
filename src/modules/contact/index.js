@@ -12,6 +12,7 @@ import {
   selectSupportIsLoading,
   sendSupport,
 } from '../../store/slices/supportsSlice';
+import PageHeader from '../../components/PageHeader';
 
 export default function Contact() {
   const dispatch = useDispatch();
@@ -35,11 +36,7 @@ export default function Contact() {
     <>
       <Header />
       <Navigation />
-      <div className="title-page">
-        <div className="overlay">
-          <h2 className="title">Contact</h2>
-        </div>
-      </div>
+      <PageHeader title="Contact" />
       <div className="contact-container">
         <div className="container-fluid">
           <ul className="contact-list">
@@ -48,8 +45,8 @@ export default function Contact() {
                 <MdEmail className="icon" />
               </div>
               <h3 className="title">Email Here</h3>
-              <a className="link" href="mailto:healthcare@gmail.com">
-                healthcare@gmail.com
+              <a className="link" href="mailto:medcares@gmail.com">
+                medcares@gmail.com
               </a>
             </li>
 

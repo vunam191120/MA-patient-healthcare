@@ -18,7 +18,7 @@ export default function Footer() {
         <div className="container-fluid">
           <div className="footer-content">
             <div className="footer-item">
-              <h3 className="title">HealthCare</h3>
+              <h3 className="title">MedCare</h3>
               <p className="description">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore aliqua.
@@ -110,7 +110,7 @@ export default function Footer() {
       </section>
       <section className="copyright-container">
         <p>
-          Copyright © 2022 HealthCare. All Rights Reserved by{' '}
+          Copyright © 2022 MedCares. All Rights Reserved by{' '}
           <Link to="#" className="link">
             Vu Nam
           </Link>

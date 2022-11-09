@@ -5,13 +5,12 @@ const PrivateRoute = ({ children, roles }) => {
 
   // Note logged in so redirect to login page
   if (!Boolean(localStorage.getItem('currentUser'))) {
-    return <Navigate to="/login" replace={true} />;
+    return <Navigate to="/signin" replace={true} />;
   }
 
-  // Check if route is restricted by role
-  if (roles && roles.indexOf(currentUser.role) === -1) {
-    // role are not authorised will redirect to home page
-    return <Navigate to="/" replace={true} />;
+  // If the account is not verified
+  if (!currentUser.is_verified) {
+    return <Navigate to="/verify" replace={true} />;
   }
 
   // Authorised role will return the children route

@@ -1,11 +1,19 @@
 import React, { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { HiOutlineChevronDown } from 'react-icons/hi';
 
 import healthCareLogo from '../../assets/img/health-care-logo.png';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchTypes, selectTypes } from '../../store/slices/articlesSlice';
 
 export default function Navigation({ activeBg }) {
+  const dispatch = useDispatch();
   const navRef = useRef();
+  const types = useSelector(selectTypes);
+
+  useEffect(() => {
+    dispatch(fetchTypes());
+  }, [dispatch]);
 
   useEffect(() => {
     const navOffsetHeight = navRef.current.clientHeight;
@@ -33,56 +41,56 @@ export default function Navigation({ activeBg }) {
       className={`navigation-container ${activeBg ? 'activeBg' : ''}`}
     >
       <div className="container-fluid navigation-content">
-        <div className="logo-container">
+        <Link to="/" className="logo-container">
           <img
             src={healthCareLogo}
             alt="logo navigation"
             className="logo-img"
           />
-          <span className="logo-text">HealthCare</span>
-        </div>
+          <span className="logo-text">MedCares</span>
+        </Link>
         <ul className="nav-list">
           <li className="nav-item">
-            <Link to="" className="nav-link">
+            <NavLink end to="/" className="nav-link">
               <span className="text">Home</span>
-              <HiOutlineChevronDown className="icon" />
-            </Link>
-            <ul className="sub-nav">
-              <Link to="" className="sub-item">
-                Sub nav 1
-              </Link>
-              <Link to="" className="sub-item">
-                Sub nav 2
-              </Link>
-              <Link to="" className="sub-item">
-                Sub nav 3
-              </Link>
-              <Link to="" className="sub-item">
-                Sub nav 4
-              </Link>
-            </ul>
+            </NavLink>
           </li>
           <li className="nav-item">
-            <Link to="" className="nav-link">
+            <NavLink end to="/about" className="nav-link">
               <span className="text">About</span>
-              <HiOutlineChevronDown className="icon" />
-            </Link>
+            </NavLink>
           </li>
           <li className="nav-item">
-            <Link to="/contact" className="nav-link">
+            <NavLink end to="/contact" className="nav-link">
               <span className="text">Contact</span>
-            </Link>
+            </NavLink>
           </li>
           <li className="nav-item">
-            <Link to="" className="nav-link">
-              <span className="text">Others</span>
+            <NavLink end to="/articles" className="nav-link">
+              <span className="text">News</span>
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink end to="/articles/type/3" className="nav-link">
+              <span className="text">Patient Guide</span>
               <HiOutlineChevronDown className="icon" />
-            </Link>
+            </NavLink>
+            <ul className="sub-nav">
+              {types.map((type, index) => (
+                <Link
+                  key={index}
+                  to={`/articles/type/${type.type_id}`}
+                  className="sub-item"
+                >
+                  {type.type_name}
+                </Link>
+              ))}
+            </ul>
           </li>
         </ul>
         <div className="other-option">
           <Link
-            to="/bookAppointment"
+            to="/appointment"
             className="button square button--blue--dark"
             type="button"
           >

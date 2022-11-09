@@ -83,3 +83,18 @@
     }
   }
 }
+
+%logo-container {
+  display: flex;
+  align-items: center;
+  .logo-img {
+    width: 46px;
+    height: 46px;
+    display: inline-block;
+    margin-right: $mg-0;
+  }
+  .logo-text {
+    display: inline-block;
+    @include styleText($color-blue-2, $fs-4 - 6, $fw-0);
+  }
+}

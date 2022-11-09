@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import {
@@ -31,7 +32,9 @@ export default function AppointmentInformation({ info }) {
         </p>
         <p className="info">
           <span className="left">Date of birth</span>
-          <span className="right">{info.date_of_birth}</span>
+          <span className="right">
+            {moment(info.date_of_birth).format('DD/MM/YYYY')}
+          </span>
         </p>
         <p className="info">
           <span className="left">Gender</span>
@@ -73,7 +76,7 @@ export default function AppointmentInformation({ info }) {
         <p className="info">
           <span className="left">Appointment</span>
           <span className="right">
-            {info.time} - {info.date}
+            {info.date} - {info.time}
           </span>
         </p>
         <p className="info">
@@ -89,7 +92,7 @@ export default function AppointmentInformation({ info }) {
           <span className="left">Promotion</span>
           <span className="right">
             Discount 15% of consultation price applies to customers who make an
-            appointment for the first time via HealthCare.com
+            appointment for the first time via MedCares.net
           </span>
         </p>
       </div>

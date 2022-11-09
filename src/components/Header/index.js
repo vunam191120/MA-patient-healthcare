@@ -11,6 +11,8 @@ import {
 import { AiOutlineTwitter } from 'react-icons/ai';
 
 import Button from '../../components/Button';
+import { Link } from 'react-router-dom';
+import { isLogin } from '../../helpers/isLogin';
 
 export default function Header() {
   return (
@@ -50,12 +52,42 @@ export default function Header() {
             <span className="socials instagram">
               <FaInstagram />
             </span>
-            <Button className="button button--text--white" type="button">
-              Sign In
-            </Button>
-            <Button className="button button--light square" type="button">
-              Sign Up
-            </Button>
+            {isLogin() ? (
+              <>
+                <Link
+                  to="/profile/user-form"
+                  className="button button--light profile-btn"
+                >
+                  <img
+                    className="avatar"
+                    src={`${
+                      JSON.parse(localStorage.getItem('currentUser')).avatar
+                    }`}
+                    alt="avatar"
+                  />
+                  Hello,{' '}
+                  {JSON.parse(localStorage.getItem('currentUser')).full_name}
+                </Link>
+                <Button
+                  onClick={() => {
+                    localStorage.removeItem('currentUser');
+                    localStorage.removeItem('accessToken');
+                    window.location.href = '/signin';
+                  }}
+                  type="button"
+                  className="button button--text--white sign-out-btn"
+                >
+                  <span>Sign Out</span>
+                </Button>
+              </>
+            ) : (
+              <>
+                <Link to="/signin" className="button button--text--white">
+                  Sign In
+                </Link>
+                <Button className="button button--light square">Sign Up</Button>
+              </>
+            )}
           </Col>
         </Row>
       </div>

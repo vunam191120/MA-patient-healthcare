@@ -106,12 +106,16 @@ export default function ClientBookAppointment() {
           gender: values.gender,
           phone: values.phone,
           description: values.description,
-          date: moment(`${date}/${moment().year()}`).format('YYYY-MM-DD'),
+          date_of_birth: moment(values.date_of_birth).format('YYYY-MM-DD'),
           email: form.getFieldValue('email'),
           time: time,
           is_foreigner: !form.getFieldValue('foreigner') ? true : false,
           clinic_id: form.getFieldValue('clinic'), // In somehow that form.getFieldsValue() lost track of clinic, doctor and category
         };
+        newAppointment.date = moment(
+          `${date}-${moment().year()}`,
+          'DD-MM-YYYY'
+        ).format('YYYY-MM-DD');
         setNewAppointment(newAppointment);
         const errorsObj = form.getFieldsError();
         // Some bugs make step can be nexted whenever form date is filled
@@ -146,7 +150,7 @@ export default function ClientBookAppointment() {
     <>
       <Header />
       <Navigation activeBg={true} />
-      <div className="title-page">
+      <div className="title-page mg-header">
         <div className="overlay">
           <h2 className="title">Appointment</h2>
         </div>

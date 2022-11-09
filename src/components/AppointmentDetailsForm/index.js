@@ -29,19 +29,19 @@ export default function AppointmentDetailsForm({
     {
       buttonID: 0,
       dayText: 'Today',
-      dayNum: moment().add(0, 'days').format('DD/MM'),
+      dayNum: moment().add(0, 'days').format('DD-MM'),
       isActived: true,
     },
     {
       buttonID: 1,
       dayText: 'Tomorrow',
-      dayNum: moment().add(1, 'days').format('DD/MM'),
+      dayNum: moment().add(1, 'days').format('DD-MM'),
       isActived: false,
     },
     {
       buttonID: 2,
       dayText: 'Overmorrow',
-      dayNum: moment().add(2, 'days').format('DD/MM'),
+      dayNum: moment().add(2, 'days').format('DD-MM'),
       isActived: false,
     },
     {
@@ -107,11 +107,11 @@ export default function AppointmentDetailsForm({
     setDayButtons(cloneDayButtons);
   };
 
-  const handleClickTime = (time) => {
+  const handleClickTime = (item) => {
     const cloneTimeButtons = timeButtons.map((button) => {
-      if (button.buttonID === time.buttonID) {
+      if (button.buttonID === item.buttonID) {
         button.isActived = true;
-        onClickTime(time.time);
+        onClickTime(item.time);
       } else {
         button.isActived = false;
       }
@@ -220,8 +220,8 @@ export default function AppointmentDetailsForm({
               onChange={(e) => {
                 const cloneDayButtons = [...dayButtons];
                 cloneDayButtons[cloneDayButtons.length - 1].dayNum =
-                  e.format('DD/MM');
-                onClickDate(e.format('DD/MM'));
+                  e.format('DD-MM');
+                onClickDate(e.format('DD-MM'));
                 setDayButtons(cloneDayButtons);
                 setToggleDatePicker(true);
               }}
