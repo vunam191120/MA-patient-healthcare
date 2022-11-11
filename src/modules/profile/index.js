@@ -1,15 +1,17 @@
 import { Col, Row } from 'antd';
 import React from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
+import ScrollToTop from 'react-scroll-to-top';
+
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
-
 import Navigation from '../../components/Navigation';
 import sidebarData from './sidebarData';
 
 export default function MyProfile() {
   return (
     <>
+      <ScrollToTop smooth color="#6f00ff" />
       <Header />
       <Navigation activeBg={true} />
       <div className="profile-container mg-header">

@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Row, Col, Input } from 'antd';
 import { MdEmail, MdLocationOn, MdPhoneInTalk } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
+import ScrollToTop from 'react-scroll-to-top';
 
 import Header from '../../components/Header';
 import Spinner from '../../components/Spinner';
@@ -34,6 +35,7 @@ export default function Contact() {
 
   return (
     <>
+      <ScrollToTop smooth color="#6f00ff" />
       <Header />
       <Navigation />
       <PageHeader title="Contact" />

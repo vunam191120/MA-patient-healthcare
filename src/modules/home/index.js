@@ -16,6 +16,7 @@ import {
 } from 'react-icons/ri';
 import moment from 'moment';
 import Typewriter from 'typewriter-effect';
+import ScrollToTop from 'react-scroll-to-top';
 
 import bgDoctor from '../../assets/img/banner-bg-doctor.png';
 import bgApp from '../../assets/img/app-bg.png';
@@ -28,8 +29,8 @@ import Footer from '../../components/Footer';
 import { Animate } from '../../components/AnimateIn';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  fetchArticles,
-  selectArticles,
+  fetchArticlesLatest,
+  selectArticlesLatest,
 } from '../../store/slices/articlesSlice';
 import Doctor from '../../components/Doctor';
 import Appointment from '../../components/Appointment';
@@ -39,10 +40,10 @@ export default function HomePage() {
   const dispatch = useDispatch();
   const [form] = Form.useForm();
   // const [appointmentForm] = Form.useForm();
-  const articles = useSelector(selectArticles);
+  const articlesLatest = useSelector(selectArticlesLatest);
 
   useEffect(() => {
-    dispatch(fetchArticles());
+    dispatch(fetchArticlesLatest());
   }, [dispatch]);
 
   const handleSubmitSearch = () => {};
@@ -52,6 +53,7 @@ export default function HomePage() {
       <Header />
       {/* Banner */}
       <section className="banner-container">
+        <ScrollToTop smooth color="#6f00ff" />
         <Navigation />
         <Row className="container-fluid banner-content">
           <Col className="left" xs={0} sm={0} md={12} lg={12} xl={12}>
@@ -469,31 +471,33 @@ export default function HomePage() {
               </div>
             </Animate.FadeInDown>
             <div className="news-list">
-              {articles.slice(articles.length - 3).map((article, index) => (
-                <Animate.FadeInDown>
-                  <figure key={index} className="news-item">
-                    <Link to={`/articles/detail/${article.slug}`}>
-                      <img
-                        className="new-image"
-                        alt="new img"
-                        src={article.image}
-                      />
-                      <figcaption className="content">
-                        <span className="date">
-                          {moment(article.created_date).format('MMM Do YY')}
-                        </span>
-                        <div className="content-overlay">
-                          <h3 className="title">{article.title}</h3>
-                          <Button className="button button--text--blue">
-                            <span>Read more</span>
-                            <span className="icon">&#43;</span>
-                          </Button>
-                        </div>
-                      </figcaption>
-                    </Link>
-                  </figure>
-                </Animate.FadeInDown>
-              ))}
+              {articlesLatest
+                .slice(articlesLatest.length - 3)
+                .map((article, index) => (
+                  <Animate.FadeInDown key={index}>
+                    <figure className="news-item">
+                      <Link to={`/articles/detail/${article.slug}`}>
+                        <img
+                          className="new-image"
+                          alt="new img"
+                          src={article.image}
+                        />
+                        <figcaption className="content">
+                          <span className="date">
+                            {moment(article.created_date).format('MMM Do YY')}
+                          </span>
+                          <div className="content-overlay">
+                            <h3 className="title">{article.title}</h3>
+                            <Button className="button button--text--blue">
+                              <span>Read more</span>
+                              <span className="icon">&#43;</span>
+                            </Button>
+                          </div>
+                        </figcaption>
+                      </Link>
+                    </figure>
+                  </Animate.FadeInDown>
+                ))}
             </div>
           </div>
         </div>

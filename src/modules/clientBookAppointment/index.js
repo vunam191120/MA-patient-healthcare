@@ -3,6 +3,7 @@ import { Form, Steps } from 'antd';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import ScrollToTop from 'react-scroll-to-top';
 
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
@@ -148,6 +149,7 @@ export default function ClientBookAppointment() {
 
   return (
     <>
+      <ScrollToTop smooth color="#6f00ff" />
       <Header />
       <Navigation activeBg={true} />
       <div className="title-page mg-header">

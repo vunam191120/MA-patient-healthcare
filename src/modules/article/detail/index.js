@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Col, Row } from 'antd';
 import moment from 'moment';
+import ScrollToTop from 'react-scroll-to-top';
 
 import Header from '../../../components/Header';
 import Navigation from '../../../components/Navigation';
@@ -38,6 +39,7 @@ export default function ArticleDetail() {
 
   return (
     <>
+      <ScrollToTop smooth color="#6f00ff" />
       <Header />
       <Navigation />
       <div className="article-detail-container mg-header">

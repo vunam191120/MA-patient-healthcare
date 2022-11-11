@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import { BsTagsFill } from 'react-icons/bs';
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import ScrollToTop from 'react-scroll-to-top';
 
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
@@ -67,6 +68,7 @@ export default function ArticleList({ type }) {
 
   return (
     <>
+      <ScrollToTop smooth color="#6f00ff" />
       <Header />
       <Navigation />
       <div className="article-container mg-header">
