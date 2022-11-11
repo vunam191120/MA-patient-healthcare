@@ -67,7 +67,7 @@ export default function ArticleDetail() {
                 {Object.keys(articleDetail).length > 0 &&
                   articleDetail.tags.map((item, index) => (
                     <Link
-                      to={`/articles/tag/${item['tag.tag_id']}`}
+                      to={`/articles/tag/${item.tag_id}`}
                       key={index}
                       className="button button--light tag-item"
                     >
