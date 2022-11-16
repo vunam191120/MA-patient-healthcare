@@ -107,6 +107,7 @@ const usersSlice = createSlice({
   initialState: {
     users: [],
     userNeedUpdate: {},
+    currentUser: {},
     isLoading: false,
     hasError: false,
   },
@@ -144,6 +145,7 @@ const usersSlice = createSlice({
     [getIdentity.fulfilled]: (state, action) => {
       action.payload.avatar = [{ url: action.payload.avatar }];
       state.userNeedUpdate = action.payload;
+      state.currentUser = action.payload;
       state.isLoading = false;
       state.hasError = false;
     },
@@ -231,6 +233,7 @@ const usersSlice = createSlice({
       localStorage.setItem('currentPatient', JSON.stringify(currentPatient));
       action.payload.avatar = [{ url: action.payload.avatar }];
       state.userNeedUpdate = action.payload;
+      state.currentUser = action.payload;
       state.isLoading = false;
       state.hasError = false;
     },
@@ -263,6 +266,8 @@ export const { changeUserNeedUpdateAvatar, deleteUserNeedUpdateAvatar } =
 
 // Selectors
 export const selectUserIsLoading = (state) => state.users.isLoading;
+
+export const selectCurrentUser = (state) => state.users.currentUser;
 
 export const selectUserNeedUpdate = (state) => state.users.userNeedUpdate;
 

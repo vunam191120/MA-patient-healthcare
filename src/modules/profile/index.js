@@ -1,14 +1,18 @@
 import { Col, Row } from 'antd';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { NavLink, Outlet } from 'react-router-dom';
 import ScrollToTop from 'react-scroll-to-top';
 
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import Navigation from '../../components/Navigation';
+import { selectCurrentUser } from '../../store/slices/usersSlice';
 import sidebarData from './sidebarData';
 
 export default function MyProfile() {
+  const currentUser = useSelector(selectCurrentUser);
+
   return (
     <>
       <ScrollToTop smooth color="#6f00ff" />
@@ -22,12 +26,14 @@ export default function MyProfile() {
                 <div className="sidebar-header">
                   <img
                     className="avatar"
+                    src={
+                      Object.keys(currentUser).length > 0
+                        ? currentUser.avatar[0].url
+                        : ''
+                    }
                     alt="avatar"
-                    src={`${
-                      JSON.parse(localStorage.getItem('currentPatient')).avatar
-                    }`}
                   />
-                  <h3 className="name">Vu Hai Nam</h3>
+                  <h3 className="name">{currentUser.full_name}</h3>
                   <h5 className="category">
                     BDS, MDS - Oral &amp; Maxillofacial Surgery
                   </h5>

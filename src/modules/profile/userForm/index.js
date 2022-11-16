@@ -65,10 +65,6 @@ export default function UserForm() {
   });
 
   useEffect(() => {
-    dispatch(getIdentity());
-  }, [dispatch]);
-
-  useEffect(() => {
     if (Object.keys(userNeedUpdate).length > 0) {
       form.setFieldsValue({
         email: userNeedUpdate.email,
@@ -119,6 +115,7 @@ export default function UserForm() {
     formData.append('patient_id', userNeedUpdate.patient_id);
 
     dispatch(updateInformation(formData));
+    dispatch(getIdentity());
   };
 
   return (

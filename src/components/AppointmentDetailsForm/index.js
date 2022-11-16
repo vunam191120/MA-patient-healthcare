@@ -225,6 +225,14 @@ export default function AppointmentDetailsForm({
                 setDayButtons(cloneDayButtons);
                 setToggleDatePicker(true);
               }}
+              disabledDate={(current) => {
+                // Disable all Sunday, today and days before today
+                return (
+                  current.day() === 0 ||
+                  // (current && current < moment().endOf('day'))
+                  current < moment().startOf('day')
+                );
+              }}
               allowClear={false}
               format="DD/MM"
               className="date-picker"

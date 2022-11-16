@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Col, Row } from 'antd';
 import { BsClock } from 'react-icons/bs';
 import {
@@ -13,8 +13,19 @@ import { AiOutlineTwitter } from 'react-icons/ai';
 import Button from '../../components/Button';
 import { Link } from 'react-router-dom';
 import { isLogin } from '../../helpers/isLogin';
+import { useDispatch, useSelector } from 'react-redux';
+import { getIdentity, selectCurrentUser } from '../../store/slices/usersSlice';
 
 export default function Header() {
+  const dispatch = useDispatch();
+  const currentUser = useSelector(selectCurrentUser);
+
+  useEffect(() => {
+    if (Object.keys(currentUser).length === 0) {
+      dispatch(getIdentity());
+    }
+  }, [dispatch, currentUser]);
+
   return (
     <section className="header-container">
       <div className="header-content">
@@ -60,13 +71,14 @@ export default function Header() {
                 >
                   <img
                     className="avatar"
-                    src={`${
-                      JSON.parse(localStorage.getItem('currentPatient')).avatar
-                    }`}
+                    src={
+                      Object.keys(currentUser).length > 0
+                        ? currentUser.avatar[0].url
+                        : ''
+                    }
                     alt="avatar"
                   />
-                  Hello,{' '}
-                  {JSON.parse(localStorage.getItem('currentPatient')).full_name}
+                  Hello, {currentUser.full_name}
                 </Link>
                 <Button
                   onClick={() => {
