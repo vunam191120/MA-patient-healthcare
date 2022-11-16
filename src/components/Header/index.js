@@ -85,7 +85,9 @@ export default function Header() {
                 <Link to="/signin" className="button button--text--white">
                   Sign In
                 </Link>
-                <Button className="button button--light square">Sign Up</Button>
+                <Link to="/signup" className="button button--light square">
+                  Sign Up
+                </Link>
               </>
             )}
           </Col>
