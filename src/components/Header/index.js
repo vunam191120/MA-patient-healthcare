@@ -61,16 +61,16 @@ export default function Header() {
                   <img
                     className="avatar"
                     src={`${
-                      JSON.parse(localStorage.getItem('currentUser')).avatar
+                      JSON.parse(localStorage.getItem('currentPatient')).avatar
                     }`}
                     alt="avatar"
                   />
                   Hello,{' '}
-                  {JSON.parse(localStorage.getItem('currentUser')).full_name}
+                  {JSON.parse(localStorage.getItem('currentPatient')).full_name}
                 </Link>
                 <Button
                   onClick={() => {
-                    localStorage.removeItem('currentUser');
+                    localStorage.removeItem('currentPatient');
                     localStorage.removeItem('accessToken');
                     window.location.href = '/signin';
                   }}

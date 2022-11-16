@@ -1,15 +1,15 @@
 import { Navigate } from 'react-router-dom';
 
 const PrivateRoute = ({ children, roles }) => {
-  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  const currentPatient = JSON.parse(localStorage.getItem('currentPatient'));
 
   // Note logged in so redirect to login page
-  if (!Boolean(localStorage.getItem('currentUser'))) {
+  if (!Boolean(localStorage.getItem('currentPatient'))) {
     return <Navigate to="/signin" replace={true} />;
   }
 
   // If the account is not verified
-  if (!currentUser.is_verified) {
+  if (!currentPatient.is_verified) {
     return <Navigate to="/verify" replace={true} />;
   }
 

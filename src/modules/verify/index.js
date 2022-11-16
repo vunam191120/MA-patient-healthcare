@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Form, Input } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,8 +21,8 @@ export default function VerifyForm() {
   const isLoading = useSelector(selectUserIsLoading);
 
   useEffect(() => {
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (currentUser.is_verified) {
+    const currentPatient = JSON.parse(localStorage.getItem('currentPatient'));
+    if (currentPatient.is_verified) {
       navigate(-1);
     }
   }, [navigate]);

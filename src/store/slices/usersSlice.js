@@ -14,12 +14,12 @@ export const signIn = createAsyncThunk(
       localStorage.setItem('accessToken', accessToken);
 
       // Get information of current user after getting token
-      const currentUser = await userAPI.getOne();
+      const currentPatient = await userAPI.getOne();
       localStorage.setItem(
-        'currentUser',
-        JSON.stringify(currentUser.data.data)
+        'currentPatient',
+        JSON.stringify(currentPatient.data.data)
       );
-      return currentUser.data.data;
+      return currentPatient.data.data;
     } catch (error) {
       return Promise.reject(error.message);
     }
@@ -39,9 +39,14 @@ export const verify = createAsyncThunk('usersSlice/verify', async (code) => {
   try {
     const result = await userAPI.verify(code);
     if (result.data.data.is_verified === 1) {
-      const cloneCurrentUser = JSON.parse(localStorage.getItem('currentUser'));
-      cloneCurrentUser.is_verified = true;
-      localStorage.setItem('currentUser', JSON.stringify(cloneCurrentUser));
+      const clonecurrentPatient = JSON.parse(
+        localStorage.getItem('currentPatient')
+      );
+      clonecurrentPatient.is_verified = true;
+      localStorage.setItem(
+        'currentPatient',
+        JSON.stringify(clonecurrentPatient)
+      );
       return result.data.data.is_verified;
     }
   } catch (error) {
@@ -65,8 +70,8 @@ export const updateInformation = createAsyncThunk(
   'usersSlice/updateInformation',
   async (newInformation) => {
     try {
-      await userAPI.update(newInformation);
-      return newInformation;
+      const result = await userAPI.update(newInformation);
+      return result.data.data;
     } catch (error) {
       return Promise.reject(error);
     }
@@ -221,9 +226,10 @@ const usersSlice = createSlice({
     },
     [updateInformation.fulfilled]: (state, action) => {
       message.success('Updated your information successfully!', 3);
-      let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-      currentUser = action.payload;
-      localStorage.setItem('currentUser', JSON.stringify(currentUser));
+      let currentPatient = JSON.parse(localStorage.getItem('currentPatient'));
+      currentPatient = action.payload;
+      localStorage.setItem('currentPatient', JSON.stringify(currentPatient));
+      action.payload.avatar = [{ url: action.payload.avatar }];
       state.userNeedUpdate = action.payload;
       state.isLoading = false;
       state.hasError = false;

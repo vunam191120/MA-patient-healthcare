@@ -5,16 +5,16 @@ import { isLogin } from '../../helpers/isLogin';
 
 export default function PatientInformation({ form }) {
   useEffect(() => {
-    if (isLogin) {
-      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (isLogin()) {
+      const currentPatient = JSON.parse(localStorage.getItem('currentPatient'));
       form.setFieldsValue({
-        email: currentUser.email,
-        name: currentUser.full_name,
-        phone: currentUser.phone,
+        email: currentPatient.email,
+        name: currentPatient.full_name,
+        phone: currentPatient.phone,
         gender:
-          currentUser.gender.charAt(0).toUpperCase() +
-          currentUser.gender.slice(1),
-        date_of_birth: moment(currentUser.date_of_birth),
+          currentPatient.gender.charAt(0).toUpperCase() +
+          currentPatient.gender.slice(1),
+        date_of_birth: moment(currentPatient.date_of_birth),
       });
     }
   }, [form]);

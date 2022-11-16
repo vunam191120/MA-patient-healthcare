@@ -24,7 +24,7 @@ export default function MyProfile() {
                     className="avatar"
                     alt="avatar"
                     src={`${
-                      JSON.parse(localStorage.getItem('currentUser')).avatar
+                      JSON.parse(localStorage.getItem('currentPatient')).avatar
                     }`}
                   />
                   <h3 className="name">Vu Hai Nam</h3>

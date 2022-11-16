@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Form, Select, Input, Radio, Row, Col, Upload, DatePicker } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { PlusOutlined } from '@ant-design/icons';
-import { useParams } from 'react-router-dom';
 import { IoClose } from 'react-icons/io5';
 import moment from 'moment';
 
@@ -55,7 +54,6 @@ const { Option } = Select;
 export default function UserForm() {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
-  const { user_id } = useParams();
   const [avatar, setAvatar] = useState([]);
   const [oldImage, setOldImage] = useState(false);
   const isLoading = useSelector(selectUserIsLoading);
