@@ -14,6 +14,18 @@ export const fetchClinics = createAsyncThunk(
   }
 );
 
+export const fetchClinic = createAsyncThunk(
+  'clinicsSlice/fetchClinic',
+  async (clinic_id) => {
+    try {
+      const result = await clinicAPI.getOne(clinic_id);
+      return result.data.data;
+    } catch (error) {
+      return Promise.reject(error.message);
+    }
+  }
+);
+
 export const fetchDoctorsClinic = createAsyncThunk(
   'clinicsSlice/fetchDoctorsClinic',
   async (clinic_id) => {
@@ -43,6 +55,7 @@ const clinicsSlice = createSlice({
   name: 'clinicsSlice',
   initialState: {
     clinics: [],
+    clinicNeedUpdate: {},
     doctorsByClinic: [],
     categoriesByClinic: [],
     isLoading: false,
@@ -61,6 +74,21 @@ const clinicsSlice = createSlice({
       state.hasError = false;
     },
     [fetchClinics.rejected]: (state, action) => {
+      message.err(action.error.message, 3);
+      state.isLoading = false;
+      state.hasError = true;
+    },
+    // Fetch Clinic
+    [fetchClinic.pending]: (state) => {
+      state.isLoading = true;
+      state.hasError = false;
+    },
+    [fetchClinic.fulfilled]: (state, action) => {
+      state.clinicNeedUpdate = action.payload;
+      state.isLoading = false;
+      state.hasError = false;
+    },
+    [fetchClinic.rejected]: (state, action) => {
       message.err(action.error.message, 3);
       state.isLoading = false;
       state.hasError = true;
@@ -100,6 +128,8 @@ const clinicsSlice = createSlice({
 
 // Selector
 export const selectClinics = (state) => state.clinics.clinics;
+
+export const selectClinicNeedUpdate = (state) => state.clinics.clinicNeedUpdate;
 
 export const selectDoctorByClinic = (state) => state.clinics.doctorsByClinic;
 

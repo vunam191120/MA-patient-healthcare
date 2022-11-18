@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { HiOutlineChevronDown } from 'react-icons/hi';
 
-import healthCareLogo from '../../assets/img/health-care-logo.png';
+import medcaresLogo from '../../assets/img/medcares-logo.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTypes, selectTypes } from '../../store/slices/articlesSlice';
 
@@ -42,11 +42,7 @@ export default function Navigation({ activeBg }) {
     >
       <div className="container-fluid navigation-content">
         <Link to="/" className="logo-container">
-          <img
-            src={healthCareLogo}
-            alt="logo navigation"
-            className="logo-img"
-          />
+          <img src={medcaresLogo} alt="logo navigation" className="logo-img" />
           <span className="logo-text">MedCares</span>
         </Link>
         <ul className="nav-list">

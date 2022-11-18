@@ -92,3 +92,16 @@
     }
   }
 }
+
+.payment-row {
+  .button-container {
+    .button {
+      padding: $pd-2 $pd-1;
+      display: flex;
+      .icon {
+        margin-left: 0;
+        margin-right: $mg-0;
+      }
+    }
+  }
+}

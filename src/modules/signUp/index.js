@@ -1,10 +1,10 @@
 import React from 'react';
 import { Row, Col, Form, Input, DatePicker, Radio } from 'antd';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
 
-import healthCareLogo from '../../assets/img/health-care-logo.png';
+import medcaresLogo from '../../assets/img/medcares-logo.png';
 import bannerLoginBg from '../../assets/img/banner-login-bg.png';
 import Button from '../../components/Button';
 import Spinner from '../../components/Spinner';
@@ -43,7 +43,6 @@ const formItemLayout = {
 
 export default function SignUpForm() {
   const [form] = Form.useForm();
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const isLoading = useSelector(selectUserIsLoading);
 
@@ -67,7 +66,7 @@ export default function SignUpForm() {
         <div className="container-fluid">
           <Link to="/" className="logo-container">
             <img
-              src={healthCareLogo}
+              src={medcaresLogo}
               alt="logo navigation"
               className="logo-img"
             />

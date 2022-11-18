@@ -5,6 +5,10 @@ const clinicAPI = {
     const url = `/clinic`;
     return axiosClient.get(url);
   },
+  getOne(clinic_id) {
+    const url = `/clinic/${clinic_id}`;
+    return axiosClient.get(url);
+  },
   getCategories(clinic_id) {
     const url = `/clinic/category/${clinic_id}`;
     return axiosClient.get(url);

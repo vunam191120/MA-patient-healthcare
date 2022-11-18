@@ -4,11 +4,13 @@ import {
   PATH_PATIENT_PROFILE_PAYMENTS,
   PATH_PATIENT_PROFILE_CHANGE_PASSWORD,
   PATH_PATIENT_PROFILE_APPOINTMENTS,
+  PATH_PATIENT_PROFILE_PAYMENT_VIEW,
 } from './path';
 
 import Profile from '../pages/profile';
 import UserInfo from '../pages/profile/userInfo';
 import Payment from '../pages/profile/payment';
+import PaymentDetailPage from '../pages/profile/payment/detail';
 import ChangePassword from '../pages/profile/changePassword';
 import Appointment from '../pages/profile/appointment';
 import NoMatch from '../pages/noMatch';
@@ -39,6 +41,10 @@ const appRoutes = [
         element: <NoMatch />,
       },
     ],
+  },
+  {
+    path: PATH_PATIENT_PROFILE_PAYMENT_VIEW,
+    element: <PaymentDetailPage />,
   },
 ];
 
