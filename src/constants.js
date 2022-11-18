@@ -24,3 +24,7 @@ export const STATUS_SUPPORT = [
 ];
 
 export const STATUS_APPOINTMENT = ['received', 'cancled', 'done'];
+
+export const VAT = '10'; // %
+
+export const DISCOUNT = '0'; // %
