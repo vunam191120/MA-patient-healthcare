@@ -20,7 +20,7 @@ const sidebarData = [
   {
     icon: <BsJournalMedical className="icon" />,
     text: 'Medical record',
-    path: '/profile/medical-record',
+    path: '/profile/medical-records',
   },
   {
     icon: <BsCreditCard2BackFill className="icon" />,

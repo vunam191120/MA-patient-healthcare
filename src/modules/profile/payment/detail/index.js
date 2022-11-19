@@ -9,7 +9,6 @@ import {
   selectPaymentIsLoading,
   selectPaymentNeedUpdate,
 } from '../../../../store/slices/paymentsSlice';
-import Spinner from '../../../../components/Spinner';
 import Header from '../../../../components/Header';
 import Navigation from '../../../../components/Navigation';
 import Footer from '../../../../components/Footer';

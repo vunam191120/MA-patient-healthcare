@@ -5,6 +5,8 @@ import {
   PATH_PATIENT_PROFILE_CHANGE_PASSWORD,
   PATH_PATIENT_PROFILE_APPOINTMENTS,
   PATH_PATIENT_PROFILE_PAYMENT_VIEW,
+  PATH_PATIENT_PROFILE_MEDICAL_RECORDS,
+  PATH_PATIENT_PROFILE_MEDICAL_RECORD_DETAIL,
 } from './path';
 
 import Profile from '../pages/profile';
@@ -14,6 +16,8 @@ import PaymentDetailPage from '../pages/profile/payment/detail';
 import ChangePassword from '../pages/profile/changePassword';
 import Appointment from '../pages/profile/appointment';
 import NoMatch from '../pages/noMatch';
+import MedicalRecord from '../pages/profile/medicalRecord';
+import MedicalRecordDetailPage from '../pages/profile/medicalRecord/detail';
 
 const appRoutes = [
   {
@@ -35,6 +39,14 @@ const appRoutes = [
       {
         path: PATH_PATIENT_PROFILE_CHANGE_PASSWORD,
         element: <ChangePassword />,
+      },
+      {
+        path: PATH_PATIENT_PROFILE_MEDICAL_RECORDS,
+        element: <MedicalRecord />,
+      },
+      {
+        path: PATH_PATIENT_PROFILE_MEDICAL_RECORD_DETAIL,
+        element: <MedicalRecordDetailPage />,
       },
       {
         path: '*',
