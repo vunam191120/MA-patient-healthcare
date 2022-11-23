@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Row, Col, Form, Select, DatePicker, Checkbox } from 'antd';
+import { Row, Col, Form, Select, DatePicker, Checkbox, Switch } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { BsPlusLg } from 'react-icons/bs';
 import moment from 'moment';
@@ -20,6 +20,8 @@ export default function AppointmentDetailsForm({
   time,
   onClickDate,
   onClickTime,
+  online,
+  setOnline,
 }) {
   const dispatch = useDispatch();
   const clinics = useSelector(selectClinics);
@@ -196,8 +198,23 @@ export default function AppointmentDetailsForm({
             </Select>
           </Form.Item>
 
+          {/* Is foreigner */}
           <Form.Item name="foreigner" valuePropName="checked">
             <Checkbox>Book for a foreigner</Checkbox>
+          </Form.Item>
+
+          {/* Is Online */}
+          <Form.Item name="is_online" valuePropName="checked">
+            <div className="switch-table">
+              <span className="text-mode" style={{ marginRight: 10 }}>
+                Online Appointment
+              </span>
+              <Switch
+                defaultChecked={online}
+                onChange={(value) => setOnline(value)}
+                className="switch"
+              />
+            </div>
           </Form.Item>
         </Col>
         <Col className="right" md={12} lg={12} xl={12} xxl={12}>

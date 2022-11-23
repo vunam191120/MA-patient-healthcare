@@ -21,7 +21,7 @@ export default function Header() {
   const currentUser = useSelector(selectCurrentUser);
 
   useEffect(() => {
-    if (Object.keys(currentUser).length === 0) {
+    if (Object.keys(currentUser).length === 0 && isLogin()) {
       dispatch(getIdentity());
     }
   }, [dispatch, currentUser]);

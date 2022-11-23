@@ -27,6 +27,7 @@ export default function ClientBookAppointment() {
   const [current, setCurrent] = useState(0);
   const [date, setDate] = useState(moment().format('DD/MM'));
   const [time, setTime] = useState();
+  const [isOnline, setIsOnline] = useState(false);
   const [newAppointment, setNewAppointment] = useState({
     customer: '',
     doctor: '',
@@ -53,6 +54,8 @@ export default function ClientBookAppointment() {
       title: 'Appointment Detail',
       content: (
         <AppointmentDetailsForm
+          online={isOnline}
+          setOnline={setIsOnline}
           form={form}
           date={date}
           onClickDate={handleOnClickDate}
@@ -111,6 +114,7 @@ export default function ClientBookAppointment() {
           email: form.getFieldValue('email'),
           time: time,
           is_foreigner: !form.getFieldValue('foreigner') ? true : false,
+          is_online: isOnline,
           clinic_id: form.getFieldValue('clinic'), // In somehow that form.getFieldsValue() lost track of clinic, doctor and category
         };
         newAppointment.date = moment(

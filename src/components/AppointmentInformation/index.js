@@ -21,6 +21,12 @@ export default function AppointmentInformation({ info }) {
           <span className="left">Type</span>
           <span className="right">Medical examination at the hospital</span>
         </p>
+        <p className="info">
+          <span className="left">Appointment Type</span>
+          <span className="right">
+            {info.is_online ? 'Online Appointment' : 'Offline Appointment'}
+          </span>
+        </p>
       </div>
 
       {/* Customer */}

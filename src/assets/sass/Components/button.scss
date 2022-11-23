@@ -14,6 +14,7 @@
   &.square {
     border-radius: $border-radius-3;
   }
+
   &.button--light {
     @include styleButton(
       $color-black-0,
@@ -108,7 +109,28 @@
 
 .payment-detail-content {
   .checkout-button {
+    display: inline-block;
     margin-top: 40px;
     margin-left: auto;
   }
+}
+
+.button--join--call {
+  margin-top: $mg-1;
+  &.square {
+    border-radius: $border-radius-3;
+  }
+  @include styleButton(
+    $color-white-0,
+    $color-blue-2,
+    $color-blue-2,
+    $fs-0 + 1,
+    $fw-1,
+    $pd-2,
+    $pd-3
+  );
+  &:hover {
+    @include hoverButton($color-white-0, $color-blue-1, $color-blue-1);
+  }
+  font-weight: normal;
 }

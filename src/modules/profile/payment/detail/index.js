@@ -21,7 +21,6 @@ import {
 } from '../../../../store/slices/clinicsSlice';
 import { selectUserNeedUpdate } from '../../../../store/slices/usersSlice';
 import { DISCOUNT, VAT } from '../../../../constants';
-import Button from '../../../../components/Button';
 
 export default function PaymentDetail() {
   const dispatch = useDispatch();
@@ -275,13 +274,14 @@ export default function PaymentDetail() {
                       xl={24}
                       xxl={24}
                     >
-                      <Button
+                      <Link
+                        to={`/payment/checkout/${payment.payment_id}`}
                         type="button"
                         className="button button--blue--dark square checkout-button"
                         onClick={() => console.log()}
                       >
                         Check out
-                      </Button>
+                      </Link>
                     </Col>
                   </Row>
                 </div>

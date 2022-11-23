@@ -1,6 +1,7 @@
 import moment from 'moment';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Tag from '../../../components/Tag';
 import {
   fetchAppointments,
@@ -30,11 +31,25 @@ const AppointmentItem = ({ appointment, clinic }) => {
           <span className="time">{appointment.time}</span>
         </p>
         <p className="clinic">
+          {appointment.is_online ? 'Online appointment' : 'Offline appointment'}
+        </p>
+        <p className="clinic">
           {clinic && Object.keys(clinic).length > 0 && clinic.clinic_name}
         </p>
         <div className="status">
           <Tag status={appointment.status}></Tag>
         </div>
+        {appointment.is_online && (
+          <a
+            href={`https://meet.medcares.net/${appointment.meeting_room}`}
+            target="_blank"
+            rel="noreferrer"
+            className="square button--join--call"
+            type="button"
+          >
+            <span>Join Call</span>
+          </a>
+        )}
       </div>
     </div>
   );
