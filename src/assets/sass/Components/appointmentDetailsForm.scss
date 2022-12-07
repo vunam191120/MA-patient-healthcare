@@ -78,10 +78,10 @@
         &.active {
           border-color: $color-blue-1;
         }
-        &:disabled {
+        &.disabled {
           cursor: not-allowed;
           opacity: 0.4;
-          background: red;
+          background: $color-gray-0;
         }
       }
     }

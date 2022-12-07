@@ -1,11 +1,11 @@
 import moment from 'moment';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import Tag from '../../../components/Tag';
 import {
   fetchAppointments,
-  selectAppointmentIsLoading,
+  // selectAppointmentIsLoading,
   selectAppointments,
 } from '../../../store/slices/appointmentsSlice';
 import {
@@ -59,7 +59,7 @@ export default function AppointmentList() {
   const dispatch = useDispatch();
   const appointments = useSelector(selectAppointments);
   const clinics = useSelector(selectClinics);
-  const isLoading = useSelector(selectAppointmentIsLoading);
+  // const isLoading = useSelector(selectAppointmentIsLoading);
 
   useEffect(() => {
     dispatch(fetchAppointments());

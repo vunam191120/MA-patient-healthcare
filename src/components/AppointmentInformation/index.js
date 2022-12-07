@@ -7,7 +7,7 @@ import {
   selectDoctorByClinic,
 } from '../../store/slices/clinicsSlice';
 
-export default function AppointmentInformation({ info }) {
+export default function AppointmentInformation({ info, dateAppointment }) {
   const doctors = useSelector(selectDoctorByClinic);
   const clinics = useSelector(selectClinics);
   const categories = useSelector(selectCategoriesByClinic);

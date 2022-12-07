@@ -13,6 +13,10 @@ import {
   selectDoctorByClinic,
 } from '../../store/slices/clinicsSlice';
 import { selectClinics } from '../../store/slices/clinicsSlice';
+import {
+  fetchDoctorSchedule,
+  selectCurrentDoctorAppointments,
+} from '../../store/slices/appointmentsSlice';
 
 const { Option } = Select;
 
@@ -22,11 +26,13 @@ export default function AppointmentDetailsForm({
   onClickTime,
   online,
   setOnline,
+  doctorID,
 }) {
   const dispatch = useDispatch();
   const clinics = useSelector(selectClinics);
   const categories = useSelector(selectCategoriesByClinic);
   const doctors = useSelector(selectDoctorByClinic);
+  const currentDoctorAppointment = useSelector(selectCurrentDoctorAppointments);
   const [dayButtons, setDayButtons] = useState([
     {
       buttonID: 0,
@@ -48,7 +54,7 @@ export default function AppointmentDetailsForm({
     },
     {
       buttonID: 3,
-      dayText: 'Other day ',
+      dayText: 'Other day',
       dayNum: <BsPlusLg className="icon" />,
       isActived: false,
     },
@@ -58,6 +64,7 @@ export default function AppointmentDetailsForm({
       buttonID: index,
       time,
       isActived: false,
+      disabled: false,
     }))
   );
 
@@ -187,6 +194,24 @@ export default function AppointmentDetailsForm({
             className="form-input-group"
           >
             <Select
+              onChange={(doctor_id) => {
+                let date =
+                  dayButtons.find((item) => item.isActived).dayNum +
+                  '-' +
+                  moment().year();
+                date = `${date.slice(6)}-${date.slice(3, 5)}-${date.slice(
+                  0,
+                  2
+                )}`;
+                dispatch(fetchDoctorSchedule({ doctor_id, date }));
+                // Reset time buttons
+                // setTimeButtons(
+                //   timeButtons.map((item) => {
+                //     item.disabled = false;
+                //     return item;
+                //   })
+                // );
+              }}
               disabled={doctors.length > 0 ? false : true}
               placeholder="Preferred doctors"
             >
@@ -224,7 +249,11 @@ export default function AppointmentDetailsForm({
           <div className="appointment-date-container">
             {dayButtons.map((item, index) => (
               <div
-                onClick={() => handleClickDate(index)}
+                onClick={() => {
+                  handleClickDate(index);
+                  // Fetch doctor's schedule when date change
+                  console.log(doctorID);
+                }}
                 key={index}
                 className={`date-item ${item.isActived ? 'active' : ''}`}
               >
@@ -259,16 +288,28 @@ export default function AppointmentDetailsForm({
           {/* Time */}
           <h4 className="label">Appointment time (*)</h4>
           <div className="appointment-time-container">
-            {timeButtons.map((item, index) => (
-              <div
-                key={index}
-                onClick={() => handleClickTime(item)}
-                className={`time-item ${item.isActived ? 'active' : ''}`}
-                disabled={true}
-              >
-                <h4 className="day-text">{item.time}</h4>
-              </div>
-            ))}
+            {timeButtons.map((item, index) => {
+              currentDoctorAppointment.find((appointment) => {
+                if (appointment.time === item.time) {
+                  item.disabled = true;
+                }
+                return appointment;
+              });
+              return (
+                <div
+                  key={index}
+                  onClick={
+                    !item.disabled ? () => handleClickTime(item) : undefined
+                  }
+                  className={`time-item ${item.isActived ? 'active' : ''} ${
+                    item.disabled ? 'disabled' : ''
+                  }`}
+                  disabled={true}
+                >
+                  <h4 className="day-text">{item.time}</h4>
+                </div>
+              );
+            })}
           </div>
           {!time && (
             <p className="error-required-time">This field is required</p>

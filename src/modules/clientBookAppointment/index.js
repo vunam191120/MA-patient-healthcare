@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { Form, Steps } from 'antd';
 import moment from 'moment';
-import { useNavigate } from 'react-router-dom';
+import { json, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ScrollToTop from 'react-scroll-to-top';
 
@@ -25,7 +25,7 @@ export default function ClientBookAppointment() {
   const dispatch = useDispatch();
   const [form] = Form.useForm();
   const [current, setCurrent] = useState(0);
-  const [date, setDate] = useState(moment().format('DD/MM'));
+  const [date, setDate] = useState(moment().format('DD-MM'));
   const [time, setTime] = useState();
   const [isOnline, setIsOnline] = useState(false);
   const [newAppointment, setNewAppointment] = useState({
@@ -56,7 +56,7 @@ export default function ClientBookAppointment() {
         <AppointmentDetailsForm
           online={isOnline}
           setOnline={setIsOnline}
-          form={form}
+          doctorID={form.getFieldValue('doctor')}
           date={date}
           onClickDate={handleOnClickDate}
           time={time}
@@ -92,10 +92,10 @@ export default function ClientBookAppointment() {
       // Appointment Detail Check
       if (
         current === 0 &&
-        (time,
-        form.getFieldValue('clinic'),
-        form.getFieldValue('category'),
-        form.getFieldValue('doctor'))
+        time &&
+        form.getFieldValue('clinic') &&
+        form.getFieldValue('category') &&
+        form.getFieldValue('doctor')
       ) {
         next();
       }

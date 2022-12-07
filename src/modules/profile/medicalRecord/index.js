@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { message, Table } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ImEye } from 'react-icons/im';
 
 import {
@@ -50,7 +50,7 @@ export default function MedicalRecordList() {
                   3
                 );
               } else if (
-                record.status === 'done' &&
+                record.status === 'done' ||
                 record.status === 'received'
               ) {
                 navigate(`detail/${record.record_id}`, { replace: true });
@@ -77,9 +77,6 @@ export default function MedicalRecordList() {
     <div className="medical-record-container">
       <div className="header">
         <h3 className="title">Medical Record</h3>
-        <Link to="create" className="button button--blue--light">
-          Add medical record
-        </Link>
       </div>
 
       <Table

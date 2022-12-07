@@ -30,11 +30,25 @@ export const fetchAppointments = createAsyncThunk(
   }
 );
 
+export const fetchDoctorSchedule = createAsyncThunk(
+  'appointmentsSlice/fetchDoctorSchedule',
+  async (data) => {
+    try {
+      const { doctor_id, date } = data;
+      const result = await appointmentAPI.getDoctorSchedule(doctor_id, date);
+      return result.data.data;
+    } catch (error) {
+      return Promise.reject(error.message);
+    }
+  }
+);
+
 // Reducer
 const appointmentsSlice = createSlice({
   name: 'appointmentsSlice',
   initialState: {
     appointments: [],
+    currentDoctorAppointments: [],
     isLoading: false,
     hasError: false,
   },
@@ -74,11 +88,29 @@ const appointmentsSlice = createSlice({
       state.isLoading = false;
       state.hasError = true;
     },
+    // Fetch Doctor Schedule
+    [fetchDoctorSchedule.pending]: (state) => {
+      state.isLoading = true;
+      state.hasError = false;
+    },
+    [fetchDoctorSchedule.fulfilled]: (state, action) => {
+      state.currentDoctorAppointments = action.payload;
+      state.isLoading = false;
+      state.hasError = false;
+    },
+    [fetchDoctorSchedule.rejected]: (state, action) => {
+      message.error(action.error.message, 3);
+      state.isLoading = false;
+      state.hasError = true;
+    },
   },
 });
 
 // Selector
 export const selectAppointments = (state) => state.appointments.appointments;
+
+export const selectCurrentDoctorAppointments = (state) =>
+  state.appointments.currentDoctorAppointments;
 
 export const selectAppointmentIsLoading = (state) =>
   state.appointments.isLoading;

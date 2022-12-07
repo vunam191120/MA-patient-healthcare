@@ -10,11 +10,11 @@ import Navigation from '../../../../components/Navigation';
 import visaLogo from '../../../../assets/img/visa.png';
 import momoLogo from '../../../../assets/img/momo.png';
 import Button from '../../../../components/Button';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
   fetchPayment,
-  selectPaymentIsLoading,
-  selectPaymentNeedUpdate,
+  // selectPaymentIsLoading,
+  // selectPaymentNeedUpdate,
 } from '../../../../store/slices/paymentsSlice';
 
 const formItemLayout = {
@@ -53,8 +53,8 @@ export default function Checkout() {
   const [form] = Form.useForm();
   const { payment_id } = useParams();
   const [mode, setMode] = useState();
-  const paymentLoading = useSelector(selectPaymentIsLoading);
-  const payment = useSelector(selectPaymentNeedUpdate);
+  // const paymentLoading = useSelector(selectPaymentIsLoading);
+  // const payment = useSelector(selectPaymentNeedUpdate);
 
   useEffect(() => {
     dispatch(fetchPayment(payment_id));
