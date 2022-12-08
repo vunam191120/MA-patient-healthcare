@@ -13,6 +13,10 @@ const paymentAPI = {
     const url = `/patient/detail/payment/${payment_id}`;
     return axiosClient.get(url);
   },
+  confirmPayment(payment) {
+    const url = `/patient/detail/create_payment_url`;
+    return axiosClient.post(url, payment);
+  },
 };
 
 export default paymentAPI;

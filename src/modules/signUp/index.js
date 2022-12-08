@@ -63,7 +63,7 @@ export default function SignUpForm() {
   return (
     <Row className="signup-container">
       <Col className="left" sm={24} md={24} lg={12} xl={12} xxl={12}>
-        <div className="container-fluid">
+        <div className="container-fluid left-side">
           <Link to="/" className="logo-container">
             <img
               src={medcaresLogo}

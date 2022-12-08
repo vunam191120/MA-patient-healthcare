@@ -67,12 +67,18 @@ export default function AppointmentDetailsForm({
       disabled: false,
     }))
   );
-
+  const [bookedTime, setBookedTime] = useState([]);
   const [toggleDatePicker, setToggleDatePicker] = useState(false);
 
   useEffect(() => {
     dispatch(fetchClinics());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (currentDoctorAppointment.length > 0) {
+      setBookedTime(currentDoctorAppointment.map((item) => item.time));
+    }
+  }, [currentDoctorAppointment]);
 
   const handleClickDate = (index) => {
     // Toggle datepicker when click
@@ -289,12 +295,9 @@ export default function AppointmentDetailsForm({
           <h4 className="label">Appointment time (*)</h4>
           <div className="appointment-time-container">
             {timeButtons.map((item, index) => {
-              currentDoctorAppointment.find((appointment) => {
-                if (appointment.time === item.time) {
-                  item.disabled = true;
-                }
-                return appointment;
-              });
+              if (bookedTime.includes(item.time)) {
+                item.disabled = true;
+              }
               return (
                 <div
                   key={index}

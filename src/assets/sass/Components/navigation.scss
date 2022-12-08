@@ -8,6 +8,7 @@
     padding: 0 $pd-0 + 2;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     .logo-container {
       @extend %logo-container;
     }
@@ -74,6 +75,41 @@
       align-items: center;
       justify-content: center;
     }
+    .mobile-nav-button {
+      display: none;
+    }
+    .mobile-nav-content {
+      transform: translateX(100vw);
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      background-color: $color-white-0;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      z-index: 1000;
+      // padding-left:
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      transition: 0.6s ease;
+      opacity: 0;
+      padding: $pd-4;
+      padding-top: $pd-5;
+      .nav-item {
+        display: block;
+        padding: $pd-2 0;
+        font-size: $fs-5;
+      }
+      .close-btn {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        font-size: $fs-4;
+      }
+      &.active {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
   }
   &.active {
     position: fixed !important;
@@ -87,6 +123,31 @@
   }
   &.activeBg {
     background-color: $color-white-0;
+  }
+
+  // Responsive
+  @include responsive('large') {
+    .navigation-content {
+      padding: 0 $pd-4;
+      .nav-list,
+      .other-option {
+        display: none;
+      }
+      .mobile-nav-button {
+        background-color: $color-blue-2;
+        display: block;
+        padding: $pd-2 $pd-0;
+        border-radius: $border-radius-3;
+        transition: 0.4s ease;
+        .icon {
+          transition: 0.4s ease;
+          @include styleText($color-white-0, $fs-4, $fw-0);
+        }
+        &:hover {
+          background-color: $color-blue-1;
+        }
+      }
+    }
   }
 }
 

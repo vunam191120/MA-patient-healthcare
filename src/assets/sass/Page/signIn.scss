@@ -2,63 +2,70 @@
   width: 100vw;
   height: 100vh;
   .left {
-    height: 100%;
+    height: 100vh;
     position: relative;
     background-image: url(../../img/login-bg.jpeg);
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    .logo-container {
-      padding: $pd-4 0 0 $pd-6;
-      @extend %logo-container;
-    }
-    .banner-container {
-      background-image: none;
+    .left-side {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      .banner-bg {
-        position: relative;
-        width: 500px;
-        height: 506px;
-        border-radius: $border-radius-5;
-        .left,
-        .right {
-          height: 100%;
-          width: 50%;
-          display: inline-block;
-          background: rgb(10, 95, 218);
-          background: linear-gradient(
-            0deg,
-            rgba(10, 95, 218, 1) 0%,
-            rgba(251, 233, 235, 1) 100%
-          );
-          border-top-left-radius: $border-radius-5;
-          border-bottom-left-radius: $border-radius-5;
-        }
-        .right {
-          background: rgb(10, 95, 218);
-          background: linear-gradient(
-            180deg,
-            rgba(10, 95, 218, 1) 0%,
-            rgba(251, 233, 235, 1) 100%
-          );
-          border-top-right-radius: $border-radius-5;
-          border-bottom-right-radius: $border-radius-5;
-        }
+      flex-direction: column;
+      height: 100%;
+      .logo-container {
+        padding: $pd-4 0 0 $pd-6;
+        @extend %logo-container;
+      }
+      .banner-container {
+        background-image: none;
+        display: flex;
+        flex: 1;
+        align-items: center;
+        justify-content: center;
+        .banner-bg {
+          position: relative;
+          width: 500px;
+          height: 506px;
+          border-radius: $border-radius-5;
+          .left,
+          .right {
+            height: 100%;
+            width: 50%;
+            display: inline-block;
+            background: rgb(10, 95, 218);
+            background: linear-gradient(
+              0deg,
+              rgba(10, 95, 218, 1) 0%,
+              rgba(251, 233, 235, 1) 100%
+            );
+            border-top-left-radius: $border-radius-5;
+            border-bottom-left-radius: $border-radius-5;
+          }
+          .right {
+            background: rgb(10, 95, 218);
+            background: linear-gradient(
+              180deg,
+              rgba(10, 95, 218, 1) 0%,
+              rgba(251, 233, 235, 1) 100%
+            );
+            border-top-right-radius: $border-radius-5;
+            border-bottom-right-radius: $border-radius-5;
+          }
 
-        .banner-img {
-          position: absolute;
-          height: 120%;
-          width: 100%;
-          left: 20px;
-          top: -20%;
+          .banner-img {
+            position: absolute;
+            height: 120%;
+            width: 100%;
+            left: 20px;
+            top: -20%;
+          }
         }
       }
     }
   }
   .right {
     // padding-top: $pd-6;
+    height: 100vh;
     background-color: $color-bg;
     display: flex;
     align-items: center;
@@ -174,6 +181,57 @@
           }
         }
       }
+    }
+  }
+  // Responsive
+  @include responsive('medium') {
+    .left {
+      width: 100%;
+      .left-side {
+        .logo-container {
+          padding: 0;
+          padding-top: $pd-4;
+          flex-direction: column;
+          .logo-img {
+            width: 100px;
+            height: 100px;
+            margin-bottom: $mg-4;
+          }
+          .logo-text {
+            font-size: $fs-4;
+          }
+        }
+        .banner-container {
+          display: none;
+        }
+      }
+    }
+    .right {
+      .form-container {
+        padding: 0 $pd-4;
+        .title {
+          font-size: $fs-4 - 6;
+        }
+        .sub-title {
+          font-size: $fs-0 + 2;
+        }
+      }
+    }
+  }
+
+  @include responsive('large') {
+    .left {
+      height: auto;
+      .left-side {
+        .banner-container {
+          padding-top: $pd-6;
+        }
+      }
+    }
+    .right {
+      height: auto;
+      padding: $pd-3 0 $pd-4 + 5;
+      align-items: flex-start;
     }
   }
 }

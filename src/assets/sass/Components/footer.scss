@@ -130,6 +130,22 @@
       }
     }
   }
+  @include responsive('extra-large') {
+    .footer-content {
+      padding-left: $pd-4;
+      padding-right: $pd-4;
+    }
+  }
+  @include responsive('large') {
+    .footer-content {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @include responsive('small') {
+    .footer-content {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
 }
 .copyright-container {
   background-color: $color-gray-6;

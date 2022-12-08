@@ -56,7 +56,7 @@ export default function HomePage() {
         <ScrollToTop smooth color="#6f00ff" />
         <Navigation />
         <Row className="container-fluid banner-content">
-          <Col className="left" xs={0} sm={0} md={12} lg={12} xl={12}>
+          <Col className="left" xs={24} sm={24} md={12} lg={12} xl={12}>
             <div className="content">
               <Typewriter
                 options={{
@@ -102,7 +102,7 @@ export default function HomePage() {
               </div>
             </div>
           </Col>
-          <Col className="right" xs={0} sm={0} md={12} lg={12} xl={12}>
+          <Col className="right" xs={24} sm={24} md={12} lg={12} xl={12}>
             <img alt="banner background doctor" src={bgDoctor} />
           </Col>
         </Row>
@@ -129,7 +129,7 @@ export default function HomePage() {
                 <div className="icon-container">
                   <BiNotepad className="icon" />
                 </div>
-                <h3 className="title">Reduce Pressure On Medical Staff</h3>
+                <h3 className="title">Reduce Pressure On Staff</h3>
                 <p className="description">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor incididunt ut labore et dolore magna

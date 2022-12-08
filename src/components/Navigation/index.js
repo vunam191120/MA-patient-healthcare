@@ -1,6 +1,8 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { HiOutlineChevronDown } from 'react-icons/hi';
+import { HiBars3 } from 'react-icons/hi2';
+import { AiFillCloseCircle } from 'react-icons/ai';
 
 import medcaresLogo from '../../assets/img/medcares-logo.png';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,6 +12,7 @@ export default function Navigation({ activeBg }) {
   const dispatch = useDispatch();
   const navRef = useRef();
   const types = useSelector(selectTypes);
+  const [navMobile, setNavMobile] = useState(false);
 
   useEffect(() => {
     dispatch(fetchTypes());
@@ -93,6 +96,41 @@ export default function Navigation({ activeBg }) {
             Make an appointment
           </Link>
         </div>
+        <div className="mobile-nav-button">
+          <HiBars3 onClick={() => setNavMobile(!navMobile)} className="icon" />
+        </div>
+        <ul className={`mobile-nav-content ${navMobile ? 'active' : ''}`}>
+          <AiFillCloseCircle
+            onClick={() => setNavMobile(false)}
+            className="close-btn"
+          />
+          <li className="nav-item">
+            <NavLink end to="/" className="nav-link">
+              <span className="text">Home</span>
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink end to="/about" className="nav-link">
+              <span className="text">About</span>
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink end to="/contact" className="nav-link">
+              <span className="text">Contact</span>
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink end to="/articles" className="nav-link">
+              <span className="text">News</span>
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink end to="/articles/type/3" className="nav-link">
+              <span className="text">Patient Guide</span>
+              {/* <HiOutlineChevronDown className="icon" /> */}
+            </NavLink>
+          </li>
+        </ul>
       </div>
     </div>
   );
